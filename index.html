@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lovescore</title>
+    <link rel="stylesheet" href="index.css">
+    
+</head>
+<body>
+    <div id="navbar">
+        <h1>Lovescore Calculator</h1>
+    </div>
+    <div class="cont">
+        <div class="grid-item gr2">
+            <div class="grid-2 ver" style="height:48vh" ></div>
+            <div class="grid-2" id="name" >
+            <label for="name1">Your Name :</label>
+            <input type="text" id="name1"required>
+            </div>
+        </div>
+        <div class="grid-item gr1">
+            <div class="grid-2 main" >
+                <img src="potion.png" id="potion">
+                <div><h3 id="result" style="opacity: 0;">Your Lovescore is</div>
+                <p >
+                    We all know that a name can tell a lot about a person. Names are not randomly chosen: they all have a meaning. 
+                </p>
+            </div>
+            <div class="grid-2 calc">
+            <input type="submit" value="Calculate" id="submit">
+            </div>
+        </div>
+        <div class="grid-item gr3">
+            <div class="grid-2 ver" style="height:48vh"></div>
+            <div class="grid-2" id="name" >
+            <label for="name2">Your Crush: </label>
+            <input type="text" id="name2"required>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('submit').addEventListener("mouseenter", function() {
+    document.getElementById('submit').style.background = "linear-gradient(to left, rgb(146, 6, 151), rgb(179, 3, 3))";
+});
+
+document.getElementById('submit').addEventListener("mouseleave", function() {
+    document.getElementById('submit').style.background = "linear-gradient(to right, rgb(146, 6, 151), rgb(179, 3, 3))";
+});
+
+        document.getElementById('submit').addEventListener("click", function() {
+            let name1 = document.getElementById('name1').value;
+            let name2 = document.getElementById('name2').value;
+
+            if (name1 === "" || name2 === "") {
+                alert("Please enter both names.");
+                return;
+            }
+            document.getElementById('potion').classList.add('animate');
+            document.getElementById('potion').addEventListener("animationend", function(){
+        var Lovescore= Math.random()*100;
+        Lovescore=Math.floor(Lovescore)+1;
+        let resultElement = document.getElementById('result');
+        
+        resultElement.textContent = 'Your LoveScore is ' + Lovescore+ '%';
+        resultElement.style.opacity='1';
+        
+        localStorage.setItem('name1', name1);
+                localStorage.setItem('name2', name2);
+                localStorage.setItem('Lovescore', Lovescore);
+            });
+        });
+
+        // On page load, clear local storage and input fields
+        window.onload = function() {
+            localStorage.clear();
+            document.getElementById('name1').value = '';
+            document.getElementById('name2').value = '';
+            resultElement.style.opacity='0';
+        };;
+    </script>
+</body>
+
+
+</html>
